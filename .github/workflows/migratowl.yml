@@ -1,0 +1,19 @@
+name: migratowl
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+  pull-requests: write
+  statuses: write
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: bitkaio/migratowl-action@v1
+        with:
+          openai-api-key: ${{ secrets.OPENROUTER_API_KEY }}
+          model-provider: openai
+          llm-base-url: https://openrouter.ai/api/v1
+          model: nvidia/nemotron-3-super-120b-a12b:free
+          scan-trigger: always
